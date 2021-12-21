@@ -1,151 +1,71 @@
-import './styles/leaflet.css';
-import { MapContainer, TileLayer, Popup, Polygon } from 'react-leaflet'
-import jsonDataEstudo from './database/jsonEstudo.json';
-import jCompetencias from './database/competencia.json';
 import { useState } from 'react';
+import { MapContainer, TileLayer, Polygon } from 'react-leaflet'
 
+// JSON imports
 
-function App() {
+import uad from './database/json/dimensao/uad.json';
+import db from './database/json/fato/db.json';
 
-  const [selectMunicipio, setSelectValue] = useState('FORTALEZA');
+// COMPONENTS imports
 
-  function handleMunicipio(e) {
-    e.preventDefault();
-    console.log(selectMunicipio);
-  }
+import Popup from './components/Popup';
 
+const App = () => {
+
+  const [selectedUad , setSelectedUad] = useState('TODOS');
 
   return (
     <>
-      <form style={{'margin': '20px'}}>
-        <span>Municipio: </span>
-        <select
-          value={selectMunicipio}
-          onChange={e => setSelectValue(e.target.value)}>
-          {jCompetencias.municipios.map((municipio, kcomp) => {
-            return (
-            <option
-               id={municipio.id}
-               k={kcomp}
-               value={municipio.municipio}
-            >
-              {municipio.municipio}
-            </option>
-            );
-          })}
-        </select>
-       {/* <button
-        onClick={handleMunicipio}
-       >
-         Municipio
-       </button> */}
-      </form>
-     
 
-      <MapContainer 
-          center={[-3.6931705133295423, -39.18431694826951]} 
-          zoom={9} 
-          scrollWheelZoom={true}
-        >
+      <span>Unidade de Negócio: </span>
+      <select
+        value={selectedUad}
+        onChange={e => setSelectedUad(e.target.value)}
+      >
+        {uad.uad.map(comp => {
+          return (
+            <option
+              key={comp.srk} 
+              value={comp.uad}
+            > 
+              {comp.uad} 
+            </option>
+          )
+        })}
+      </select>
+
+      <MapContainer
+        center={[-3.7717103, -38.5369201]}
+        zoom={10}
+        scrollWheelZoom={true}
+        style={{'height': '90vh', 'width': '100%', 'borderRadius': '5px'}}
+      >
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
-
-       
-       
-       {jsonDataEstudo.db.filter(municipio => (municipio.municipio) == selectMunicipio).map((fM, kM) => {
-         return (
-           <Polygon
-            key={kM}
-            positions={[fM.polygono]}
-            color={fM.color}
-           >
-             <Popup>
-                <h3>
-                  Unidade de Negócio: <h2 style={{ 'color': fM.color }}>
-                    {fM.uad}
-                  </h2>
-                </h3>
-                <h3>
-                  Valor Faturado: 
-                  <h2 style={{ 'color': fM.color }}>
-                    R$ {fM.vlr_faturado}
-                  </h2>
-                </h3>
-                <h3>
-                  Valor Arrecadado: 
-                    <h2 style={{ 'color': fM.color }}>
-                      R$ {fM.vlr_arrecadado}
-                    </h2>
-                </h3>
-                <h3>
-                  Valor Debitado: 
-                    <h2 style={{ 'color': fM.color }}>
-                      R$ {fM.vlr_debitado}
-                    </h2>
-                </h3>
-                <button 
-                  style={{ fontSize: '16px', borderRadius: '3px', padding: '5px', fontFamily: 'sans-serif' }} 
-                  onClick={() => alert(`Você clicou na ${fM.uad}`)}
-                >
-                  Aperte aqui para saber a UAD.
-                </button>
-              </Popup>
-           </Polygon>
-
-           
-         )
-       })}
-
-        {/* {jsonDataEstudo.db.map((loc, k) => {
+        
+        {db.db.filter(uad => uad.uad === (selectedUad === 'TODOS' ? uad.uad : selectedUad)).map(uad => {
           return (
             <Polygon
-              key={k}
-              positions={[loc.polygono]}
-              color={loc.color}
-            >
-
-              <Popup>
-                <h3>
-                  Unidade de Negócio: <h2 style={{ 'color': loc.color }}>
-                    {loc.uad}
-                  </h2>
-                </h3>
-                <h3>
-                  Valor Faturado: 
-                  <h2 style={{ 'color': loc.color }}>
-                    R$ {loc.vlr_faturado}
-                  </h2>
-                </h3>
-                <h3>
-                  Valor Arrecadado: 
-                    <h2 style={{ 'color': loc.color }}>
-                      R$ {loc.vlr_arrecadado}
-                    </h2>
-                </h3>
-                <h3>
-                  Valor Debitado: 
-                    <h2 style={{ 'color': loc.color }}>
-                      R$ {loc.vlr_debitado}
-                    </h2>
-                </h3>
-                <button 
-                  style={{ fontSize: '16px', borderRadius: '3px', padding: '5px', fontFamily: 'sans-serif' }} 
-                  onClick={() => alert(`Você clicou na ${loc.uad}`)}
-                >
-                  Aperte aqui para saber a UAD.
-                </button>
-              </Popup>
-
+              key={uad.uad}
+              color={uad.color}
+              positions={[uad.polygono]}>
+                <Popup 
+                  uad={uad.uad} 
+                  municipio={uad.municipio}
+                  faturado={uad.vlr_faturado}
+                  debitado={uad.vlr_debitado}
+                  arrecadado={uad.vlr_arrecadado}
+                  color={uad.color}
+                />
             </Polygon>
           )
-        })} */}
+        })}
 
       </MapContainer>
-
     </>
-  );
-}
+  )
+};
 
 export default App;

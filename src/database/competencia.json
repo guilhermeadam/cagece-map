@@ -1,8 +1,0 @@
-{
-    "municipios": [
-        {"id": 1, "municipio": "CAUCAIA"},
-        {"id": 2, "municipio": "FORTALEZA"},
-        {"id": 3, "municipio": "ITAPIPOCA"},
-        {"id": 4, "municipio": "PENTECOSTE"}
-    ]
-}

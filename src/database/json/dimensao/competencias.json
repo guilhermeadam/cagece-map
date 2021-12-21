@@ -1,0 +1,16 @@
+{
+    "competencias": [
+        {"srk": 0, "anomes": "01/2021"},
+        {"srk": 1, "anomes": "02/2021"},
+        {"srk": 2, "anomes": "03/2021"},
+        {"srk": 3, "anomes": "04/2021"},
+        {"srk": 4, "anomes": "05/2021"},
+        {"srk": 5, "anomes": "06/2021"},
+        {"srk": 6, "anomes": "07/2021"},
+        {"srk": 7, "anomes": "08/2021"},
+        {"srk": 8, "anomes": "09/2021"},
+        {"srk": 9, "anomes": "10/2021"},
+        {"srk": 10, "anomes": "11/2021"},
+        {"srk": 11, "anomes": "12/2021"}
+    ]
+}
