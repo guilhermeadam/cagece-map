@@ -6,6 +6,8 @@ import { MapContainer, TileLayer, Polygon } from 'react-leaflet'
 import uad from './database/json/dimensao/uad.json';
 import db from './database/json/fato/db.json';
 
+import jsonteste from './database/json/fato/jsonteste.json'
+
 // COMPONENTS imports
 
 import Popup from './components/Popup';
@@ -35,17 +37,17 @@ const App = () => {
       </select>
 
       <MapContainer
-        center={[-3.7717103, -38.5369201]}
-        zoom={10}
+        center={[-5.1991852,-39.4109497]}
+        zoom={7}
         scrollWheelZoom={true}
-        style={{'height': '90vh', 'width': '100%', 'borderRadius': '5px'}}
+        style={{'height': '97vh', 'width': '100%', 'borderRadius': '5px'}}
       >
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+          url="https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png"
         />
         
-        {db.db.filter(uad => uad.uad === (selectedUad === 'TODOS' ? uad.uad : selectedUad)).map(uad => {
+         {db.db.filter(uad => uad.uad === (selectedUad === 'TODOS' ? uad.uad : selectedUad)).map(uad => {
           return (
             <Polygon
               key={uad.uad}
@@ -61,7 +63,23 @@ const App = () => {
                 />
             </Polygon>
           )
-        })}
+        })} 
+
+       {/* {jsonteste.vw_une_unidade_negocio_geoserver.map(j => {
+          return (
+            <Polygon
+              positions={j.coordenada}>
+                <Popup 
+                  uad={uad.uad} 
+                  municipio={uad.municipio}
+                  faturado={uad.vlr_faturado}
+                  debitado={uad.vlr_debitado}
+                  arrecadado={uad.vlr_arrecadado}
+                  color={uad.color}
+                /> 
+            </Polygon>
+          )
+        })} */}
 
       </MapContainer>
     </>
