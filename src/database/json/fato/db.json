@@ -1,7 +1,7 @@
 {
     "db": [
         {
-            "uad": "UN-CAUCAIA",
+            "uad": "UN - CAUCAIA",
             "municipio": "CAUCAIA",
             "vlr_faturado": 65.987,
             "vlr_arrecadado": 91.987,
@@ -44,7 +44,7 @@
             ]
         },
         {
-            "uad": "UN-FORTALEZA",
+            "uad": "UN - FORTALEZA",
             "municipio": "FORTALEZA",
             "vlr_faturado": 15.987,
             "vlr_arrecadado": 21.987,
@@ -73,7 +73,7 @@
             ]
         },
         {
-            "uad": "UN-ITAPIPOCA",
+            "uad": "UN - ITAPIPOCA",
             "municipio": "ITAPIPOCA",
             "vlr_faturado": 615.987,
             "vlr_arrecadado": 921.987,
@@ -130,7 +130,7 @@
             ]
         },
         {
-            "uad": "UN-PENTECOSTE",
+            "uad": "UN - PENTECOSTE",
             "municipio": "PENTECOSTE",
             "vlr_faturado": 65.987,
             "vlr_arrecadado": 91.987,

@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import { MapContainer, TileLayer, Polygon } from 'react-leaflet'
 
-import { 
-  FormControl, 
-  InputLabel, 
-  Select, 
+import {
+  FormControl,
+  InputLabel,
+  Select,
   MenuItem,
 } from '@mui/material';
 
@@ -22,12 +22,12 @@ import Popup from './components/Popup';
 
 const App = () => {
 
-  const [selectedUad , setSelectedUad] = useState('TODAS');
+  const [selectedUad, setSelectedUad] = useState('TODAS');
 
   return (
     <>
-    <GlobalStyles styles={{ ul: { margin: 0, padding: 0, listStyle: 'none' } }} />
-    <CssBaseline />
+      <GlobalStyles styles={{ ul: { margin: 0, padding: 0, listStyle: 'none' } }} />
+      <CssBaseline />
       <FormControl sx={{ m: 1, minWidth: 180 }}>
         <InputLabel id='teste-inputlabel'>Unidade de Negócio</InputLabel>
         <Select
@@ -47,33 +47,33 @@ const App = () => {
       </FormControl>
 
       <MapContainer
-        center={[-5.1991852,-39.4109497]}
+        center={[-5.1991852, -39.4109497]}
         zoom={7}
         scrollWheelZoom={true}
-        style={{'height': '97vh', 'width': '100%', 'borderRadius': '5px'}}
+        style={{ 'height': '50vh', 'width': '100%', 'borderRadius': '5px' }}
       >
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png"
         />
-        
-         {db.db.filter(uad => uad.uad === (selectedUad === 'TODAS' ? uad.uad : selectedUad)).map(uad => {
+
+        {db.db.filter(uad => uad.uad === (selectedUad === 'TODAS' ? uad.uad : selectedUad)).map(uad => {
           return (
             <Polygon
               key={uad.uad}
               color={uad.color}
               positions={[uad.polygono]}>
-                <Popup 
-                  uad={uad.uad} 
-                  municipio={uad.municipio}
-                  faturado={uad.vlr_faturado}
-                  debitado={uad.vlr_debitado}
-                  arrecadado={uad.vlr_arrecadado}
-                  color={uad.color}
-                />
+              <Popup
+                uad={uad.uad}
+                municipio={uad.municipio}
+                faturado={uad.vlr_faturado}
+                debitado={uad.vlr_debitado}
+                arrecadado={uad.vlr_arrecadado}
+                color={uad.color}
+              />
             </Polygon>
           )
-        })} 
+        })}
 
       </MapContainer>
     </>
